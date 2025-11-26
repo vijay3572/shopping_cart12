@@ -1,98 +1,126 @@
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const products = [
   {
     id: 1,
     name: "iPhone 15",
     price: 120000,
-    img: "https://m.media-amazon.com/images/I/71d7rfSl0wL._SL1500_.jpg",
-    desc: "Apple iPhone 15 with A16 Bionic, 48MP camera, USB-C fast charging."
+    img: "/images/iphone15.jpg",
+    desc: "Apple iPhone 15 with A16 Bionic, 48MP camera, USB-C charging.",
   },
   {
     id: 2,
     name: "Samsung S24",
     price: 90000,
-    img: "https://m.media-amazon.com/images/I/71WXWqGbbOL._SL1500_.jpg",
-    desc: "Samsung S24 with Snapdragon 8 Gen 3, Dynamic AMOLED screen."
+    img: "/images/s24.jpg",
+    desc: "Samsung S24 with Snapdragon 8 Gen 3, Dynamic AMOLED screen.",
   },
   {
     id: 3,
     name: "OnePlus 12",
     price: 65000,
-    img: "https://m.media-amazon.com/images/I/61Io5-ojWUL._SL1500_.jpg",
-    desc: "OnePlus 12 with 100W charging and Hasselblad camera system."
+    img: "/images/oneplus12.jpg",
+    desc: "OnePlus 12 with 100W charging and Hasselblad camera.",
   },
   {
     id: 4,
     name: "Vivo X100",
     price: 78000,
-    img: "https://m.media-amazon.com/images/I/61+qWfSm7pL._SL1500_.jpg",
-    desc: "Vivo X100 with MediaTek chipset and Zeiss optics."
+    img: "/images/vivo.jpg",
+    desc: "Vivo X100 with MediaTek chipset and Zeiss optics.",
+  },
+  {
+    id: 5,
+    name: "Realme GT 6",
+    price: 45000,
+    img: "/images/realme.jpg",
+    desc: "Realme GT 6 with 144Hz AMOLED display.",
   },
 ];
 
-const ProductDetails = () => {
-  const { id } = useParams();
-  const product = products.find((p) => p.id === parseInt(id));
+const Products = ({ addToCart }) => {
+  const [count, setCount] = useState({});
+  const navigate = useNavigate();
 
-  // If product does not exist
-  if (!product) {
-    return <h2 style={{ textAlign: "center", marginTop: "50px" }}>Product not found</h2>;
-  }
+  const handleAdd = (item) => {
+    const updated = { ...count };
+    updated[item.id] = (updated[item.id] || 0) + 1;
+    setCount(updated);
+
+    addToCart({ ...item, quantity: updated[item.id] });
+  };
+
+  const openProduct = (id) => {
+    navigate(`/product/${id}`);
+  };
 
   return (
     <div style={styles.page}>
-      <div style={styles.card}>
-        <img src={product.img} alt={product.name} style={styles.img} />
+      <h1 style={styles.title}>Mobile Phones</h1>
 
-        <h1>{product.name}</h1>
-        <p style={styles.price}>₹{product.price}</p>
-        <p style={styles.desc}>{product.desc}</p>
+      <div style={styles.grid}>
+        {products.map((item) => {
+          const qty = count[item.id] || 0;
 
-        <button style={styles.btn}>Add to Cart</button>
+          return (
+            <div key={item.id} style={styles.card}>
+              <div onClick={() => openProduct(item.id)} style={{ cursor: "pointer" }}>
+                <img src={item.img} alt={item.name} style={styles.img} />
+                <h3>{item.name}</h3>
+              </div>
+
+              <p style={styles.price}>₹{item.price}</p>
+
+              <button
+                style={{
+                  ...styles.btn,
+                  backgroundColor: qty > 0 ? "green" : "#111",
+                }}
+                onClick={() => handleAdd(item)}
+              >
+                {qty > 0 ? `Added (${qty})` : "Add to Cart"}
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 };
 
 const styles = {
-  page: {
-    padding: "20px",
-    display: "flex",
-    justifyContent: "center",
+  page: { padding: "20px" },
+  title: { textAlign: "center", marginBottom: "25px", fontSize: "32px" },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: "20px",
+    padding: "10px 40px",
   },
   card: {
-    maxWidth: "450px",
     background: "#fff",
-    padding: "20px",
     borderRadius: "12px",
-    boxShadow: "0 5px 15px rgba(0,0,0,0.2)",
+    padding: "15px",
     textAlign: "center",
+    boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
   },
   img: {
     width: "100%",
-    borderRadius: "12px",
+    height: "220px",
+    objectFit: "cover",
+    borderRadius: "10px",
   },
-  price: {
-    fontSize: "22px",
-    fontWeight: "bold",
-    marginTop: "10px",
-  },
-  desc: {
-    fontSize: "16px",
-    marginTop: "10px",
-    color: "#555",
-  },
+  price: { fontSize: "18px", fontWeight: "bold", margin: "10px 0" },
   btn: {
-    marginTop: "15px",
-    padding: "12px 20px",
-    fontSize: "16px",
-    background: "black",
-    color: "white",
+    width: "100%",
+    padding: "10px",
     border: "none",
-    borderRadius: "8px",
+    borderRadius: "5px",
+    color: "#fff",
+    fontSize: "16px",
     cursor: "pointer",
   },
 };
 
-export default ProductDetails;
+export default Products;

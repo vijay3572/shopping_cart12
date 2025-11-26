@@ -6,9 +6,7 @@ const Navbar = ({ cartCount }) => {
       style={{
         width: "100%",
         height: "70px",
-        backgroundImage: "url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundColor: "#111", // Solid dark background
         color: "#fff",
         display: "flex",
         justifyContent: "space-between",
@@ -19,7 +17,6 @@ const Navbar = ({ cartCount }) => {
         left: 0,
         boxSizing: "border-box",
         zIndex: 1000,
-        backdropFilter: "blur(2px)",
       }}
     >
       <h2 style={{ margin: 0 }}>Mobile Shop</h2>
