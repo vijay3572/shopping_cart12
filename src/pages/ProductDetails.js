@@ -65,9 +65,12 @@ const Products = ({ addToCart }) => {
 
           return (
             <div key={item.id} style={styles.card}>
-              <div onClick={() => openProduct(item.id)} style={{ cursor: "pointer" }}>
+              <div
+                onClick={() => openProduct(item.id)}
+                style={{ cursor: "pointer" }}
+              >
                 <img src={item.img} alt={item.name} style={styles.img} />
-                <h3>{item.name}</h3>
+                <h3 style={styles.name}>{item.name}</h3>
               </div>
 
               <p style={styles.price}>₹{item.price}</p>
@@ -75,7 +78,7 @@ const Products = ({ addToCart }) => {
               <button
                 style={{
                   ...styles.btn,
-                  backgroundColor: qty > 0 ? "green" : "#111",
+                  backgroundColor: qty > 0 ? "#16a34a" : "#111",
                 }}
                 onClick={() => handleAdd(item)}
               >
@@ -89,37 +92,76 @@ const Products = ({ addToCart }) => {
   );
 };
 
+// ⭐ Modern Trending Styles ⭐
 const styles = {
-  page: { padding: "20px" },
-  title: { textAlign: "center", marginBottom: "25px", fontSize: "32px" },
+  page: {
+    padding: "30px",
+    background: "#f5f5f5",
+    minHeight: "100vh",
+  },
+
+  title: {
+    textAlign: "center",
+    marginBottom: "25px",
+    fontSize: "36px",
+    fontWeight: "900",
+    color: "#111",
+    letterSpacing: "1px",
+  },
+
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: "20px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "25px",
     padding: "10px 40px",
   },
+
   card: {
-    background: "#fff",
-    borderRadius: "12px",
-    padding: "15px",
+    background: "rgba(255, 255, 255, 0.85)",
+    backdropFilter: "blur(10px)",
+    borderRadius: "16px",
+    padding: "18px",
     textAlign: "center",
-    boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
+    boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+    transition: "0.3s",
+    cursor: "pointer",
+    transform: "translateY(0)",
+    hoverEffect: {
+      transform: "translateY(-8px)",
+    },
   },
+
   img: {
     width: "100%",
-    height: "220px",
+    height: "230px",
     objectFit: "cover",
-    borderRadius: "10px",
+    borderRadius: "14px",
+    marginBottom: "10px",
+    transition: "0.3s",
   },
-  price: { fontSize: "18px", fontWeight: "bold", margin: "10px 0" },
+
+  name: {
+    fontSize: "20px",
+    margin: "5px 0",
+    color: "#222",
+  },
+
+  price: {
+    fontSize: "18px",
+    fontWeight: "bold",
+    margin: "10px 0",
+    color: "#444",
+  },
+
   btn: {
     width: "100%",
-    padding: "10px",
+    padding: "12px",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "8px",
     color: "#fff",
     fontSize: "16px",
     cursor: "pointer",
+    transition: "0.3s",
   },
 };
 
