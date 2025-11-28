@@ -106,7 +106,7 @@ const Home = () => {
             letterSpacing: "1px",
           }}
         >
-          Mobile Phones • Laptops • Earbuds
+          Mobile Phones • Laptops • rbuds
         </p>
       </div>
 

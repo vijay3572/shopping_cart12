@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // -------------------- PRODUCTS DATA --------------------
@@ -44,6 +44,7 @@ const Products = ({ addToCart }) => {
     return acc;
   }, {});
 
+  // Tilt hover effect
   const handleTilt = (e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -84,11 +85,10 @@ const Products = ({ addToCart }) => {
     }, 1500);
   };
 
-  const categories = ["all", "mobile", "laptop", "earbuds"]; // updated here too
+  const categories = ["all", "mobile", "laptop", "earbuds"];
 
   return (
     <div style={styles.page}>
-      {/* Shop Branding */}
       <h1 style={styles.brand}>TechVibe ⚡</h1>
 
       {/* Category Tabs */}

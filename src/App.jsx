@@ -8,6 +8,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
 import OrderSuccess from "./pages/OrderSuccess";
+import ProductDetails from "./pages/ProductDetails"; // Correct path
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -23,14 +24,37 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar cartCount={cart.length} />
+
       <div style={{ marginTop: "80px" }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products addToCart={addToCart} />} />
-          <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
-          <Route path="/checkout" element={<Checkout cartItems={cart} setCart={setCart} />} />
+
+          <Route
+            path="/products"
+            element={<Products addToCart={addToCart} />}
+          />
+
+          <Route
+            path="/product/:id"
+            element={<ProductDetails addToCart={addToCart} />}
+          />
+
+          <Route
+            path="/cart"
+            element={<Cart cart={cart} removeFromCart={removeFromCart} />}
+          />
+
+          <Route
+            path="/checkout"
+            element={<Checkout cartItems={cart} setCart={setCart} />}
+          />
+
           <Route path="/contact" element={<Contact />} />
           <Route path="/order-success" element={<OrderSuccess />} />
+
+          
+
+          
         </Routes>
       </div>
     </BrowserRouter>

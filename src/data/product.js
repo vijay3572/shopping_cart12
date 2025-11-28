@@ -1,0 +1,18 @@
+export const products = [
+  { id: 1, name: "iPhone 15", price: 120000, img: "/images/iphone15.jpg", desc: "Apple iPhone 15 with A16 Bionic, 48MP camera, USB-C charging.", category: "mobile", rating: 4.5, discount: 0 },
+  { id: 2, name: "iPhone 15 Pro", price: 135000, img: "/images/iphone15p.jpg", desc: "iPhone 15 Pro with A17 Bionic, advanced camera and titanium build.", category: "mobile", rating: 4.8, discount: 10 },
+  { id: 3, name: "iPhone 15 Pro Max", price: 155000, img: "/images/iphone15pro.jpg", desc: "iPhone 15 Pro Max with largest screen and best camera.", category: "mobile", rating: 4.7, discount: 5 },
+  { id: 4, name: "iPhone 14", price: 95000, img: "/images/i14.jpg", desc: "iPhone 14 with A15 Bionic, OLED Display.", category: "mobile", rating: 4.3, discount: 0 },
+  { id: 5, name: "iPhone 14 Pro", price: 120000, img: "/images/iphone14.jpg", desc: "iPhone 14 Pro with 48MP Camera & Dynamic Island.", category: "mobile", rating: 4.6, discount: 5 },
+  { id: 6, name: "Samsung S24", price: 90000, img: "/images/s24.jpg", desc: "Samsung S24 flagship with Snapdragon 8 Gen 3.", category: "mobile", rating: 4.4, discount: 0 },
+  { id: 7, name: "OnePlus 12", price: 65000, img: "/images/1+12.jpg", desc: "OnePlus 12 with 100W charging & Hasselblad optics.", category: "mobile", rating: 4.2, discount: 0 },
+  { id: 8, name: "Vivo X100", price: 78000, img: "/images/vivox100.jpg", desc: "Vivo X100 with Zeiss optics and AMOLED display.", category: "mobile", rating: 4.1, discount: 0 },
+  { id: 9, name: "Realme GT 6", price: 45000, img: "/images/realmegt6.jpg", desc: "Realme GT 6 with 144Hz AMOLED.", category: "mobile", rating: 4, discount: 0 },
+  { id: 10, name: "iQOO Z7 Pro", price: 23999, img: "/images/iqooz7.jpg", desc: "iQOO Z7 Pro with curved AMOLED.", category: "mobile", rating: 3.9, discount: 0 },
+  { id: 11, name: "MacBook Pro 16", price: 250000, img: "/images/macbook16pro.jpg", desc: "Apple MacBook Pro 16 with M2 Max Chip.", category: "laptop", rating: 4.9, discount: 10 },
+  { id: 12, name: "Dell XPS 15", price: 185000, img: "/images/dellxps15.jpg", desc: "Dell XPS 15 with Intel i9 and 4K OLED display.", category: "laptop", rating: 4.7, discount: 5 },
+  { id: 13, name: "HP Spectre x360", price: 150000, img: "/images/hpspectrex360.jpg", desc: "HP Spectre x360 2-in-1 convertible laptop.", category: "laptop", rating: 4.6, discount: 0 },
+  { id: 14, name: "AirPods Pro", price: 25000, img: "/images/airpodspro.jpg", desc: "Apple AirPods Pro with noise cancellation.", category: "earbuds", rating: 4.8, discount: 0 },
+  { id: 15, name: "Sony WF-1000XM5", price: 22000, img: "/images/sonywf.jpg", desc: "Sony wireless earbuds with industry-leading ANC.", category: "earbuds", rating: 4.7, discount: 5 },
+  { id: 16, name: "OnePlus Buds Pro 2", price: 12000, img: "/images/oneplus.jpg", desc: "OnePlus Buds Pro 2 with 94ms low-latency.", category: "earbuds", rating: 4.3, discount: 0 },
+];
