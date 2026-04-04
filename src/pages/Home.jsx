@@ -1,13 +1,28 @@
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const categories = [
   { id: 1, name: "Mobile Phones", img: "/images/phone.jpg", type: "mobile" },
   { id: 2, name: "Laptops", img: "/images/laptop.jpg", type: "laptop" },
-  { id: 3, name: "Earbuds", img: "/images/airpods.jpg", type: "earrbuds" },
+  { id: 3, name: "Earbuds", img: "/images/airpods.jpg", type: "earbuds" },
 ];
 
 const Home = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.margin = "0";
+    document.body.style.padding = "0";
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.margin = "0";
+    document.documentElement.style.padding = "0";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    };
+  }, []);
 
   const handleCategoryClick = (type) => {
     navigate(`/products?category=${type}`);
@@ -17,183 +32,194 @@ const Home = () => {
     <div
       style={{
         width: "100%",
-        minHeight: "100vh",
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        height: "100vh",
+        overflow: "hidden",
+        position: "relative",
         display: "flex",
-        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        color: "#fff",
-        textShadow: "2px 2px 8px rgba(0,0,0,0.9)",
-        position: "relative",
-        overflow: "hidden",
-        padding: "40px 20px",
+        boxSizing: "border-box",
       }}
     >
-      {/* Dark overlay */}
+      {/* Background Image */}
       <div
         style={{
           position: "absolute",
-          width: "100%",
-          height: "100%",
+          inset: 0,
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          zIndex: 0,
+        }}
+      />
+
+      {/* Dark Overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
           background:
-            "linear-gradient(135deg, rgba(0,0,0,0.75), rgba(0,0,0,0.3))",
-          top: 0,
-          left: 0,
+            "linear-gradient(135deg, rgba(0,0,0,0.70), rgba(0,0,0,0.35))",
           zIndex: 1,
         }}
-      ></div>
+      />
 
-      {/* Glow Circles */}
+      {/* Left Glow */}
       <div
         style={{
           position: "absolute",
-          width: "350px",
-          height: "350px",
-          background: "rgba(0, 255, 200, 0.15)",
+          width: "320px",
+          height: "320px",
           borderRadius: "50%",
-          top: "20%",
+          background: "rgba(255, 0, 120, 0.12)",
+          left: "-100px",
+          bottom: "80px",
+          filter: "blur(90px)",
+          zIndex: 1,
+        }}
+      />
+
+      {/* Right Glow */}
+      <div
+        style={{
+          position: "absolute",
+          width: "320px",
+          height: "320px",
+          borderRadius: "50%",
+          background: "rgba(0, 255, 200, 0.12)",
           right: "-100px",
-          filter: "blur(80px)",
+          top: "100px",
+          filter: "blur(90px)",
           zIndex: 1,
         }}
-      ></div>
-      <div
-        style={{
-          position: "absolute",
-          width: "300px",
-          height: "300px",
-          background: "rgba(255, 0, 120, 0.15)",
-          borderRadius: "50%",
-          bottom: "15%",
-          left: "-120px",
-          filter: "blur(80px)",
-          zIndex: 1,
-        }}
-      ></div>
+      />
 
-      {/* Page Title */}
+      {/* Main Content */}
       <div
         style={{
+          position: "relative",
           zIndex: 2,
+          width: "100%",
+          maxWidth: "1200px",
+          padding: "20px",
+          boxSizing: "border-box",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
           textAlign: "center",
-          marginBottom: "50px",
+          color: "#fff",
         }}
       >
-        <h2
+        <h1
           style={{
-            fontSize: "55px",
+            margin: "0 0 18px 0",
+            fontSize: "64px",
             fontWeight: "800",
-            letterSpacing: "2px",
-            marginBottom: "15px",
-            animation: "floatUp 2s ease-in-out infinite alternate",
+            lineHeight: "1.1",
+            textShadow: "0 4px 14px rgba(0,0,0,0.7)",
           }}
         >
           Welcome to Shopping
-        </h2>
+        </h1>
 
         <p
           style={{
+            margin: "0 0 50px 0",
             fontSize: "22px",
-            opacity: 0,
-            maxWidth: "480px",
-            margin: "0 auto",
-            animation: "slideFadeIn 2s ease-in-out forwards 0.5s",
-            letterSpacing: "1px",
+            fontWeight: "500",
+            color: "rgba(255,255,255,0.92)",
+            textShadow: "0 2px 8px rgba(0,0,0,0.6)",
           }}
         >
           Mobile Phones • Laptops • Earbuds
         </p>
-      </div>
 
-      {/* Categories Grid */}
-      <div
-        style={{
-          display: "flex",
-          gap: "30px",
-          zIndex: 2,
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
-        {categories.map((cat) => (
-          <div
-            key={cat.id}
-            onClick={() => handleCategoryClick(cat.type)}
-            style={{
-              position: "relative",
-              width: "250px",
-              height: "200px",
-              cursor: "pointer",
-              borderRadius: "20px",
-              overflow: "hidden",
-              backdropFilter: "blur(12px)",
-              background: "rgba(255,255,255,0.1)",
-              border: "1px solid rgba(255,255,255,0.2)",
-              boxShadow: "0 8px 30px rgba(0,0,0,0.2)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              padding: "20px",
-              transition: "0.4s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "scale(1.08)";
-              e.currentTarget.style.boxShadow = "0 15px 50px rgba(0,0,0,0.4)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.boxShadow = "0 8px 30px rgba(0,0,0,0.2)";
-            }}
-          >
-            <img
-              src={cat.img}
-              alt={cat.name}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "28px",
+            flexWrap: "wrap",
+          }}
+        >
+          {categories.map((cat) => (
+            <div
+              key={cat.id}
+              onClick={() => handleCategoryClick(cat.type)}
               style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                position: "absolute",
-                top: 0,
-                left: 0,
-                zIndex: 1,
-                opacity: 0.6,
+                width: "280px",
+                height: "220px",
+                borderRadius: "24px",
+                overflow: "hidden",
+                cursor: "pointer",
+                position: "relative",
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.22)",
+                boxShadow: "0 12px 35px rgba(0,0,0,0.35)",
+                transition: "transform 0.35s ease, box-shadow 0.35s ease",
+                backdropFilter: "blur(4px)",
+                WebkitBackdropFilter: "blur(4px)",
               }}
-            />
-            <h3
-              style={{
-                zIndex: 2,
-                color: "#fff",
-                fontSize: "22px",
-                fontWeight: "700",
-                textShadow: "2px 2px 10px rgba(0,0,0,0.8)",
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.06)";
+                e.currentTarget.style.boxShadow =
+                  "0 18px 45px rgba(0,0,0,0.45)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.boxShadow =
+                  "0 12px 35px rgba(0,0,0,0.35)";
               }}
             >
-              {cat.name}
-            </h3>
-          </div>
-        ))}
+              <img
+                src={cat.img}
+                alt={cat.name}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                  position: "absolute",
+                  inset: 0,
+                  zIndex: 1,
+                }}
+              />
+
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.15))",
+                  zIndex: 2,
+                }}
+              />
+
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "20px",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "100%",
+                  textAlign: "center",
+                  fontSize: "20px",
+                  fontWeight: "700",
+                  color: "#fff",
+                  zIndex: 3,
+                  textShadow: "2px 2px 10px rgba(0,0,0,0.9)",
+                }}
+              >
+                {cat.name}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-
-      {/* Animations */}
-      <style>
-        {`
-          @keyframes floatUp {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-15px); }
-          }
-
-          @keyframes slideFadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-          }
-        `}
-      </style>
     </div>
   );
 };

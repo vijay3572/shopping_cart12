@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEnvelope, FaPhone, FaInstagram, FaMapMarkerAlt } from "react-icons/fa";
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+
+  useEffect(() => {
+    document.body.style.margin = "0";
+    document.body.style.padding = "0";
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.margin = "0";
+    document.documentElement.style.padding = "0";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    };
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,42 +30,81 @@ const Contact = () => {
   return (
     <div
       style={{
-        minHeight: "100vh",
+        height: "100vh",
         width: "100%",
+        overflow: "hidden",
         background:
           "linear-gradient(135deg, #0a0d2d 0%, #1a1f4b 50%, #2e356f 100%)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "40px",
+        padding: "20px",
+        boxSizing: "border-box",
         fontFamily: "Poppins, sans-serif",
+        position: "relative",
       }}
     >
+      {/* Glow Effect */}
+      <div
+        style={{
+          position: "absolute",
+          width: "320px",
+          height: "320px",
+          background: "rgba(75, 227, 255, 0.12)",
+          borderRadius: "50%",
+          top: "8%",
+          right: "-100px",
+          filter: "blur(90px)",
+          zIndex: 0,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          width: "280px",
+          height: "280px",
+          background: "rgba(111, 115, 255, 0.14)",
+          borderRadius: "50%",
+          bottom: "5%",
+          left: "-100px",
+          filter: "blur(90px)",
+          zIndex: 0,
+        }}
+      />
+
       <div
         style={{
           width: "100%",
           maxWidth: "1100px",
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          gap: "40px",
+          gap: "30px",
+          position: "relative",
+          zIndex: 1,
+          alignItems: "stretch",
         }}
       >
         {/* LEFT SIDE */}
         <div
           style={{
             backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
             background: "rgba(255,255,255,0.05)",
             padding: "30px",
             borderRadius: "20px",
             border: "1px solid rgba(255,255,255,0.1)",
             boxShadow: "0 0 20px rgba(0,0,0,0.4)",
+            boxSizing: "border-box",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
           }}
         >
           <h1
             style={{
-              color: "#4be3ff", // Updated cyan title
+              color: "#4be3ff",
               fontSize: "32px",
-              marginBottom: "10px",
+              margin: "0 0 10px 0",
               fontWeight: "700",
             }}
           >
@@ -60,21 +113,22 @@ const Contact = () => {
 
           <p
             style={{
-              color: "#c7c9ff", // Soft lavender text
-              marginBottom: "20px",
+              color: "#c7c9ff",
+              margin: "0 0 20px 0",
               lineHeight: "1.6",
+              fontSize: "16px",
             }}
           >
             Have any questions or need help? We're here for you!
           </p>
 
-          <div style={{ marginTop: "20px" }}>
+          <div style={{ marginTop: "10px" }}>
             <p style={infoStyle}>
               <FaEnvelope style={iconStyle} /> support@techvibestore.com
             </p>
 
             <p style={infoStyle}>
-              <FaPhone style={iconStyle} /> +91 98765 43210
+              <FaPhone style={iconStyle} /> +91 6381574367
             </p>
 
             <p style={infoStyle}>
@@ -92,18 +146,23 @@ const Contact = () => {
           onSubmit={handleSubmit}
           style={{
             backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
             background: "rgba(255,255,255,0.08)",
             padding: "30px",
             borderRadius: "20px",
             border: "1px solid rgba(255,255,255,0.1)",
             boxShadow: "0 0 20px rgba(0,0,0,0.4)",
+            boxSizing: "border-box",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
           }}
         >
           <h2
             style={{
-              color: "#4be3ff", // Title color changed to soft neon cyan
+              color: "#4be3ff",
               fontSize: "26px",
-              marginBottom: "20px",
+              margin: "0 0 20px 0",
               fontWeight: "600",
             }}
           >
@@ -115,6 +174,7 @@ const Contact = () => {
             name="name"
             placeholder="Your Name"
             required
+            value={formData.name}
             onChange={handleChange}
             style={inputStyle}
           />
@@ -124,6 +184,7 @@ const Contact = () => {
             name="email"
             placeholder="Your Email"
             required
+            value={formData.email}
             onChange={handleChange}
             style={inputStyle}
           />
@@ -132,11 +193,14 @@ const Contact = () => {
             name="message"
             placeholder="Write your message..."
             required
+            value={formData.message}
             onChange={handleChange}
             style={{ ...inputStyle, height: "120px", resize: "none" }}
           />
 
-          <button style={btnStyle}>Send Message</button>
+          <button type="submit" style={btnStyle}>
+            Send Message
+          </button>
         </form>
       </div>
     </div>
@@ -151,10 +215,11 @@ const inputStyle = {
   borderRadius: "12px",
   border: "1px solid rgba(255,255,255,0.3)",
   background: "rgba(255,255,255,0.1)",
-  color: "#e9e9ff", // Soft white-lavender
+  color: "#e9e9ff",
   fontSize: "15px",
   outline: "none",
   transition: "0.3s",
+  boxSizing: "border-box",
 };
 
 const btnStyle = {
@@ -168,21 +233,23 @@ const btnStyle = {
   cursor: "pointer",
   fontWeight: "600",
   transition: "0.3s",
+  marginTop: "5px",
 };
 
 const infoStyle = {
   display: "flex",
   alignItems: "center",
-  color: "#c7c9ff", // lavender text
+  color: "#c7c9ff",
   fontSize: "16px",
-  marginBottom: "12px",
+  marginBottom: "14px",
+  lineHeight: "1.5",
 };
 
 const iconStyle = {
   marginRight: "10px",
   fontSize: "20px",
-  color: "#4be3ff", // neon cyan
-  transition: "0.3s",
+  color: "#4be3ff",
+  flexShrink: 0,
 };
 
 export default Contact;
